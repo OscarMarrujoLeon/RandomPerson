@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.omarrujo.randomperson.viewmodel.RandomUserViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.activity.MainActivity">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:cardBackgroundColor="@color/control"
+
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
+
+
+        </androidx.cardview.widget.CardView>
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.12" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            app:cardCornerRadius="85dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardElevation="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/view">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                tools:src="@drawable/ic_launcher_foreground"
+                android:onClick="@{ () -> viewModel.fetchRandomUser() }"
+                android:scaleType="centerCrop"
+                android:background="@color/white" />
+
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvSubject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Hola, Mi nombre es"
+            android:text="@{viewModel.caption}"
+            android:layout_marginTop="20dp"
+            android:alpha="0.4"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvPersonInformation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="micheal.simpson@example.com"
+            android:gravity="center"
+            android:text="@{viewModel.title}"
+            android:layout_marginTop="10dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+            app:layout_constraintTop_toBottomOf="@+id/tvSubject" />
+
+        <LinearLayout
+            android:id="@+id/lyfirst"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="100dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPersonInformation">
+
+            <!--    PERSON-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:cardCornerRadius="85dp"
+                app:cardBackgroundColor="@color/white"
+                android:layout_marginEnd="30dp"
+                app:cardElevation="2dp">
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:checked="@{viewModel.cbPerson}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/ic_person"
+                    android:onClick="@{() -> viewModel.setPersonInformation(@string/person, viewModel.userData.results[0].name.first + ' ' + viewModel.userData.results[0].name.last, viewModel.cbPerson)}"
+                    android:scaleY="1.5"
+                    android:scaleX="1.5" />
+            </androidx.cardview.widget.CardView>
+
+            <!--    EMAIL-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:cardCornerRadius="85dp"
+                android:layout_marginEnd="30dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="4dp">
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@{viewModel.cbEmail}"
+                    android:button="@drawable/baseline_email_24"
+                    android:onClick="@{() -> viewModel.setPersonInformation(@string/email, viewModel.userData.results[0].email, viewModel.cbEmail)}"
+                    android:scaleY="1.5"
+                    android:scaleX="1.5" />
+            </androidx.cardview.widget.CardView>
+
+            <!--    BIRTHDAY-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:cardCornerRadius="85dp"
+                android:layout_marginEnd="30dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="4dp">
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@{viewModel.cbBithday}"
+                    android:button="@drawable/baseline_cake_24"
+                    android:onClick="@{() -> viewModel.setPersonInformation(@string/birthday, viewModel.userData.results[0].dob.date.substring(0, 10), viewModel.cbBithday)}"
+                    android:scaleY="1.5"
+                    android:scaleX="1.5" />
+            </androidx.cardview.widget.CardView>
+
+            <!--    ADRESS-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:cardCornerRadius="85dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="4dp">
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/baseline_map_24"
+                    android:checked="@{viewModel.cbAdress}"
+                    android:onClick="@{() -> viewModel.setPersonInformation(@string/address, viewModel.userData.results[0].location.street.number + ' ' + viewModel.userData.results[0].location.street.name, viewModel.cbAdress)}"
+                    android:scaleY="1.5"
+                    android:scaleX="1.5" />
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lysecond"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lyfirst">
+
+            <!--       PHONE-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:cardCornerRadius="85dp"
+                android:layout_marginEnd="20dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="4dp">
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@{viewModel.cbPhone}"
+                    android:button="@drawable/baseline_phone_24"
+                    android:onClick="@{() -> viewModel.setPersonInformation(@string/phone, viewModel.userData.results[0].phone,viewModel.cbPhone)}"
+                    android:scaleY="1.5"
+                    android:scaleX="1.5" />
+            </androidx.cardview.widget.CardView>
+
+            <!--       Pass-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:cardCornerRadius="85dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="4dp">
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/baseline_password_24"
+                    android:checked="@{viewModel.cbPassword}"
+                    android:onClick="@{() -> viewModel.setPersonInformation(@string/password, viewModel.userData.results[0].login.password,viewModel.cbPassword)}"
+                    android:scaleY="1.5"
+                    android:scaleX="1.5" />
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

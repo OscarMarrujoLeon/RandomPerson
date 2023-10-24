@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Personas Aleatorias</string>
+    <string name="person">Hola, Mi nombre es</string>
+    <string name="email">Mi correo electrónico es</string>
+    <string name="birthday">Mi cumpleaños es</string>
+    <string name="address">Mi dirección es</string>
+    <string name="phone">Mi número de teléfono es</string>
+    <string name="password">Mi contraseña es</string>
+</resources>
